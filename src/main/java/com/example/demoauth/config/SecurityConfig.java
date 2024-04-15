@@ -37,15 +37,19 @@ public class SecurityConfig {
     }
 
     // Configuring HttpSecurity
-    /*@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
+                .requestMatchers("/auth/addNewUser","/auth/generateToken").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
+                .and()
+                .authorizeHttpRequests().requestMatchers( "/auth/removeUser/{id}", "/auth/welcome","auth/getStudents", "auth/addNewStudent","/auth/removeStudent/{id}").permitAll()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/generate/").permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -54,8 +58,8 @@ public class SecurityConfig {
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
-    }*/
-    @Bean
+    }
+  /*  @Bean
     @Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
         http
@@ -65,7 +69,7 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults());
         return http.build();
-    }
+    }*/
 
     // Password Encoding
     @Bean

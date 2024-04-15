@@ -1,10 +1,8 @@
 package com.example.demoauth.controller;
 
-//import com.ey.springboot3security.entity.AuthRequest;
-//import com.ey.springboot3security.entity.UserInfo;
-//import com.ey.springboot3security.service.JwtService;
-//import com.ey.springboot3security.service.UserInfoService;
+
 import com.example.demoauth.entity.AuthRequest;
+
 import com.example.demoauth.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +15,7 @@ import com.example.demoauth.service.JwtService;
 import com.example.demoauth.service.UserInfoService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,6 +42,15 @@ public class UserController {
         return service.addUser(userInfo);
     }
 
+    @DeleteMapping("removeUser/{id}")
+    public void removeUser(@PathVariable int id){
+
+        service.deleteUser(id);
+    }
+    /*@GetMapping("/getUsers")
+    public List<UserInfo> getUsers(UserInfo userInfo){
+        return UserInfoService.getUsers(userInfo);
+    }*/
     @GetMapping("/user/userProfile")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public String userProfile() {
@@ -68,4 +76,3 @@ public class UserController {
     }
 
 }
-

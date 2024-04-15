@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.demoauth.repository.UserInfoRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +39,13 @@ public class UserInfoService implements UserDetailsService {
         return "User Added Successfully";
     }
 
+    public void deleteUser(int id){
+        repository.deleteById(id);
+    }
+  /*  public static List<UserInfo> getUsers(UserInfo userInfo){
+        List<UserInfo>users=repository.findAll();
+        return users;
+    }*/
     /*
     install mysql
     jdbc:mysql://localhost:3306/{schema_name}

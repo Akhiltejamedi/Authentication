@@ -1,7 +1,8 @@
 package com.example.demoauth.filter;
 
-//import com.ey.springboot3security.service.JwtService;
-//import com.ey.springboot3security.service.UserInfoService;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.JwtParserBuilder;
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +29,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     private UserInfoService userDetailsService;
 
+    /*private JwtParser createJwtParserWithClockSkew() {
+        JwtParserBuilder parserBuilder = Jwts.parserBuilder();
+        parserBuilder.setAllowedClockSkewSeconds(60); // Allow a 60-second clock skew
+        return parserBuilder.build();
+    }*/
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
@@ -48,4 +55,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+
+
 }
